@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Powertree — Place Your Order</title>
+  <meta name="description" content="Place your order with Powertree. Fast, simple, and reliable.">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0%, #0f172a 60%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #e2e8f0;
+    }
+
+    .container {
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid #334155;
+      border-radius: 18px;
+      padding: 42px 38px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      animation: fadeUp 0.5s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: #00ff88;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .logo::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00ff88;
+      box-shadow: 0 0 12px #00ff88;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #00ff88, #00b4d8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      margin-bottom: 30px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 13px 15px;
+      margin-bottom: 18px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      color: #e2e8f0;
+      font-size: 15px;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #00ff88;
+      box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.15);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #475569;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(90deg, #00ff88, #00b4d8);
+      color: #0f172a;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-top: 6px;
+      font-family: inherit;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 255, 136, 0.25);
+    }
+
+    button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 14px;
+      display: none;
+      animation: fadeUp 0.3s ease-out;
+    }
+
+    .status.success {
+      background: #064e3b;
+      color: #6ee7b7;
+      border: 1px solid #10b981;
+      display: block;
+    }
+
+    .status.error {
+      background: #7f1d1d;
+      color: #fca5a5;
+      border: 1px solid #ef4444;
+      display: block;
+    }
+
+    .footer {
+      margin-top: 26px;
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #0f172a;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">Powertree</div>
+    <h1>Place Your Order</h1>
+    <p class="subtitle">Fill in the details below and we'll get back to you shortly.</p>
+
+    <form id="orderForm" autocomplete="on">
+      <label for="name">Your Name *</label>
+      <input type="text" id="name" name="name" required maxlength="100" placeholder="John Doe">
+
+      <label for="contact">Email or Phone *</label>
+      <input type="text" id="contact" name="contact" required maxlength="100" placeholder="you@example.com">
+
+      <label for="order">What would you like to order? *</label>
+      <textarea id="order" name="order" required maxlength="1000" placeholder="Describe your order in detail..."></textarea>
+
+      <label for="notes">Additional Notes (optional)</label>
+      <textarea id="notes" name="notes" maxlength="500" placeholder="Anything else we should know?"></textarea>
+
+      <button type="submit" id="submitBtn">Send Order</button>
+    </form>
+
+    <div class="status" id="status"></div>
+
+    <div class="footer">powertree.site</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('orderForm');
+    const status = document.getElementById('status');
+    const submitBtn = document.getElementById('submitBtn');
+    const API_URL = 'https://api.powertree.site';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span>Sending...';
+      status.className = 'status';
+      status.textContent = '';
+
+      const payload = {
+        name: form.name.value.trim(),
+        contact: form.contact.value.trim(),
+        order: form.order.value.trim(),
+        notes: form.notes.value.trim()
+      };
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Server error');
+        }
+
+        status.className = 'status success';
+        status.textContent = '✅ Order sent! We will contact you soon.';
+        form.reset();
+
+        // Auto-hide success after 6s
+        setTimeout(() => {
+          status.className = 'status';
+        }, 6000);
+
+      } catch (err) {
+        status.className = 'status error';
+        status.textContent = '❌ ' + (err.message || 'Something went wrong. Please try again.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Order';
+      }
+    });
+  </script>
+</body>
+</html>
